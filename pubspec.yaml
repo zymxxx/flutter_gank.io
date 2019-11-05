@@ -14,6 +14,7 @@ dependencies:
   cached_network_image:
   pull_to_refresh:
   flutter_swiper:
+  flutter_webview_plugin:
 
 dev_dependencies:
   flutter_test:

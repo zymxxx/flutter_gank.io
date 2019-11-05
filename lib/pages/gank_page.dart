@@ -5,6 +5,7 @@ import 'package:flutter_gank/API/api_gank.dart';
 import 'package:flutter_gank/model/gank_item.dart';
 import 'package:flutter_gank/model/gank_post.dart';
 import 'package:flutter_gank/network/http_manager.dart';
+import 'package:flutter_gank/pages/webview_page.dart';
 import 'package:flutter_gank/widget/gank_list_item.dart';
 import 'package:flutter_gank/widget/gank_list_title.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -45,6 +46,7 @@ class GankPageState extends State<GankPage> {
               pinned: true,
               floating: true,
               expandedHeight: 260,
+              elevation: 0,
               title: Text('今日推荐干货'),
               flexibleSpace: FlexibleSpaceBar(
                 collapseMode: CollapseMode.pin,
@@ -59,13 +61,26 @@ class GankPageState extends State<GankPage> {
           itemCount: _gankItems.length,
           itemBuilder: (BuildContext context, int index) {
             var gankItem = _gankItems[index];
-            return gankItem.isTitle
-                ? GankItemTitle(gankItem.category)
-                : GankListItem(gankItem);
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => WebViewPage(gankItem)),
+                );
+              },
+              child: _buildListItem(gankItem),
+            );
           },
         ),
       ),
     );
+  }
+
+  Widget _buildListItem(gankItem) {
+    return gankItem.isTitle
+        ? GankItemTitle(gankItem.category)
+        : GankListItem(gankItem);
   }
 
   _buildSwiperWidget() {

@@ -12,9 +12,7 @@ class MyApp extends StatelessWidget {
       hideFooterWhenNotFull: true,
       child: MaterialApp(
         title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+        theme: ThemeData.light(),
         home: RootPage(),
       ),
     );
